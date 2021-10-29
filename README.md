@@ -1,7 +1,9 @@
 Test Project
 
 launch the project run Android:
+
 yarn install
+
 yarn start
 yarn android
 
