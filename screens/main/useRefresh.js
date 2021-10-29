@@ -10,9 +10,9 @@ export default function useRefresh(load) {
   const lastUpdateTimer = useRef(null);
 
   const reload = async () => {
-    clearInterval(timer.current);
+    clearTimeout(timer.current);
     await load();
-    timer.current = setInterval(() => reload(), AUTO_REFRESH_INTERVAL);
+    timer.current = setTimeout(() => reload(), AUTO_REFRESH_INTERVAL);
     setIsRefresh(false);
     lastUpdateTimer.current = setTimeout(
       () => setIsRefresh(true),
