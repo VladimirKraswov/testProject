@@ -10,6 +10,8 @@ import {
   ItemSeparator,
   UserName,
   Avatar,
+  ITEM_HEIGHT,
+  ITEM_SEPARATOR_HEIGHT,
 } from './styles';
 import useRefresh from './useRefresh';
 
@@ -63,6 +65,11 @@ export default function Main({navigation}) {
       <SafeAreaView>
         <FlatList
           ItemSeparatorComponent={ItemSeparator}
+          getItemLayout={(data, index) => ({
+            length: ITEM_HEIGHT + ITEM_SEPARATOR_HEIGHT,
+            offset: (ITEM_HEIGHT + ITEM_SEPARATOR_HEIGHT) * index,
+            index,
+          })}
           onRefresh={refresh}
           refreshing={isPending}
           data={data}
