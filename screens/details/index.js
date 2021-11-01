@@ -9,7 +9,7 @@ import {Container, CommitContainer, UserName, Avatar, Label} from './styles';
 function Commit({commit}) {
   const handleOpenUrl = useCallback(async () => {
     await Linking.openURL(commit.url);
-  }, []);
+  }, [commit]);
 
   return (
     <CommitContainer onPress={handleOpenUrl}>
@@ -31,7 +31,7 @@ export default function Details({route}) {
 
   const handleOpenUrl = useCallback(async () => {
     await Linking.openURL(user.repo.url);
-  }, []);
+  }, [user]);
 
   return (
     <Container>

@@ -40,7 +40,7 @@ export default function Main({navigation}) {
     dataIndex => () => {
       navigation.navigate('Details', {dataIndex});
     },
-    [],
+    [navigation],
   );
 
   const renderItem = useCallback(
@@ -58,23 +58,28 @@ export default function Main({navigation}) {
     [handleSelectUser],
   );
 
+  const getItemLayout = useCallback(
+    (_, index) => ({
+      length: ITEM_HEIGHT + ITEM_SEPARATOR_HEIGHT,
+      offset: (ITEM_HEIGHT + ITEM_SEPARATOR_HEIGHT) * index,
+      index,
+    }),
+    [],
+  );
+
   const keyExtractor = useCallback(item => item.id, []);
 
   return (
     <Container>
       <SafeAreaView>
         <FlatList
-          ItemSeparatorComponent={ItemSeparator}
-          getItemLayout={(data, index) => ({
-            length: ITEM_HEIGHT + ITEM_SEPARATOR_HEIGHT,
-            offset: (ITEM_HEIGHT + ITEM_SEPARATOR_HEIGHT) * index,
-            index,
-          })}
-          onRefresh={refresh}
-          refreshing={isPending}
           data={data}
-          keyExtractor={keyExtractor}
+          ItemSeparatorComponent={ItemSeparator}
+          refreshing={isPending}
           renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          getItemLayout={getItemLayout}
+          onRefresh={refresh}
         />
       </SafeAreaView>
     </Container>
